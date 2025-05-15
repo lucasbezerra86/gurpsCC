@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="mvPane" prefHeight="720.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.StartUpController">
+   <children>
+      <Button fx:id="btNew" layoutX="353.0" layoutY="316.0" mnemonicParsing="false" onAction="#onBtNewAction" text="New Character">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="btOpen" layoutX="523.0" layoutY="316.0" mnemonicParsing="false" text="Open Character">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="btQuit" layoutX="701.0" layoutY="316.0" mnemonicParsing="false" text="Quit">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

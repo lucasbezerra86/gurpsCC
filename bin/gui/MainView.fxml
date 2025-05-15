@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="mvPane" prefHeight="720.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MainViewController">
+   <children>
+      <TextField fx:id="stSet" layoutX="71.0" layoutY="144.0" onAction="#stCalculate" prefHeight="25.0" prefWidth="45.0" />
+      <Label layoutX="34.0" layoutY="135.0" prefHeight="40.0" prefWidth="38.0" text="ST">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="stCost" layoutX="127.0" layoutY="147.0" />
+      <TextField fx:id="dxSet" layoutX="71.0" layoutY="174.0" onAction="#dxCalculate" prefHeight="25.0" prefWidth="45.0" />
+      <Label layoutX="32.0" layoutY="165.0" prefHeight="40.0" prefWidth="38.0" text="DX">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="dxCost" layoutX="127.0" layoutY="177.0" />
+      <TextField fx:id="iqSet" layoutX="71.0" layoutY="204.0" onAction="#iqCalculate" prefHeight="25.0" prefWidth="45.0" />
+      <Label layoutX="33.0" layoutY="195.0" prefHeight="40.0" prefWidth="38.0" text="IQ">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="iqCost" layoutX="127.0" layoutY="207.0" />
+      <TextField fx:id="htSet" layoutX="71.0" layoutY="234.0" onAction="#htCalculate" prefHeight="25.0" prefWidth="45.0" />
+      <Label layoutX="33.0" layoutY="225.0" prefHeight="40.0" prefWidth="38.0" text="HT">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="htCost" layoutX="127.0" layoutY="237.0" />
+      <Label fx:id="stCost12" layoutX="126.0" layoutY="123.0" text="Cost" />
+      <TextField fx:id="hpSet" layoutX="196.0" layoutY="146.0" onAction="#hpCalculate" prefHeight="25.0" prefWidth="45.0" />
+      <Label layoutX="159.0" layoutY="137.0" prefHeight="40.0" prefWidth="38.0" text="HP">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="hpCost" layoutX="252.0" layoutY="149.0" onDragDetected="#hpCalculate" />
+      <Label fx:id="stCost121" layoutX="243.0" layoutY="123.0" text="Cost" />
+      <TextField fx:id="willSet" layoutX="196.0" layoutY="176.0" onAction="#willCalculate" prefHeight="25.0" prefWidth="45.0" />
+      <Label layoutX="152.0" layoutY="167.0" prefHeight="40.0" prefWidth="45.0" text="Will">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="willCost" layoutX="252.0" layoutY="179.0" />
+      <TextField fx:id="perSet" layoutX="196.0" layoutY="206.0" onAction="#perCalculate" prefHeight="25.0" prefWidth="45.0" />
+      <Label layoutX="155.0" layoutY="197.0" prefHeight="40.0" prefWidth="38.0" text="Per">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="perCost" layoutX="252.0" layoutY="209.0" />
+      <TextField fx:id="fpSet" layoutX="196.0" layoutY="234.0" onAction="#fpCalculate" prefHeight="25.0" prefWidth="45.0" />
+      <Label layoutX="159.0" layoutY="225.0" prefHeight="40.0" prefWidth="38.0" text="FP">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="fpCost" layoutX="252.0" layoutY="237.0" />
+      <Label layoutX="34.0" layoutY="267.0" prefHeight="40.0" prefWidth="93.0" text="Basic Lift:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="34.0" layoutY="310.0" prefHeight="40.0" prefWidth="119.0" text="Basic Speed:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="218.0" layoutY="267.0" prefHeight="40.0" prefWidth="84.0" text="Damage">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="273.0" layoutY="310.0" prefHeight="40.0" prefWidth="127.0" text="Basic Move:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <MenuBar layoutX="11.0" layoutY="1.0" prefHeight="25.0" prefWidth="1200.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <Label layoutX="299.0" layoutY="275.0" prefHeight="25.0" prefWidth="30.0" text="Thr">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="384.0" layoutY="275.0" prefHeight="25.0" prefWidth="30.0" text="Sw">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="stCost122" layoutX="240.0" layoutY="299.0" text="Cost" />
+      <Label fx:id="stCost1221" layoutX="461.0" layoutY="302.0" text="Cost" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="50.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../img/gurpsLogo.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="323.0" layoutY="35.0" text="Name:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField layoutX="366.0" layoutY="33.0" prefHeight="25.0" prefWidth="234.0" />
+      <Label layoutX="606.0" layoutY="35.0" text="Player:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField layoutX="650.0" layoutY="33.0" prefHeight="25.0" prefWidth="234.0" />
+      <Label layoutX="890.0" layoutY="35.0" prefHeight="20.0" prefWidth="108.0" text="Point Total:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="ptTotalSet" layoutX="962.0" layoutY="33.0" onAction="#pointTotalCalculate" prefHeight="25.0" prefWidth="53.0" />
+      <Label layoutX="861.0" layoutY="65.0" prefHeight="20.0" prefWidth="108.0" text="Unspent Points:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="323.0" layoutY="65.0" text="Height:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField layoutX="369.0" layoutY="63.0" prefHeight="25.0" prefWidth="88.0" />
+      <Label layoutX="472.0" layoutY="65.0" text="Weight:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField layoutX="522.0" layoutY="63.0" prefHeight="25.0" prefWidth="78.0" />
+      <Label layoutX="609.0" layoutY="65.0" text="Size Modifier: ">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField layoutX="700.0" layoutY="63.0" prefHeight="25.0" prefWidth="60.0" />
+      <Label layoutX="767.0" layoutY="65.0" text="Age:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField layoutX="796.0" layoutY="63.0" prefHeight="25.0" prefWidth="60.0" />
+      <Label layoutX="319.0" layoutY="97.0" text="Appearance:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField layoutX="399.0" layoutY="95.0" prefHeight="25.0" prefWidth="618.0" />
+      <TextField layoutX="432.0" layoutY="151.0" prefHeight="25.0" prefWidth="211.0" />
+      <TextField layoutX="432.0" layoutY="180.0" prefHeight="25.0" prefWidth="211.0" />
+      <TextField layoutX="432.0" layoutY="208.0" prefHeight="25.0" prefWidth="211.0" />
+      <TextField layoutX="432.0" layoutY="237.0" prefHeight="25.0" prefWidth="211.0" />
+      <Label fx:id="stCost1211" layoutX="881.0" layoutY="125.0" text="Cost" />
+      <Label fx:id="stCost12111" layoutX="881.0" layoutY="154.0" text="Cost" />
+      <Label fx:id="stCost121111" layoutX="881.0" layoutY="182.0" text="Cost" />
+      <Label fx:id="stCost1211111" layoutX="881.0" layoutY="212.0" text="Cost" />
+      <Label fx:id="stCost12111111" layoutX="881.0" layoutY="241.0" text="Cost" />
+      <Label layoutX="476.0" layoutY="118.0" text="Languages:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="679.0" layoutY="120.0" text="Spoken">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="800.0" layoutY="121.0" text="Written">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <ComboBox layoutX="654.0" layoutY="151.0" prefHeight="25.0" prefWidth="108.0" />
+      <ComboBox layoutX="654.0" layoutY="180.0" prefHeight="25.0" prefWidth="108.0" />
+      <ComboBox layoutX="654.0" layoutY="208.0" prefHeight="25.0" prefWidth="108.0" />
+      <ComboBox layoutX="654.0" layoutY="237.0" prefHeight="25.0" prefWidth="108.0" />
+      <ComboBox layoutX="766.0" layoutY="152.0" prefHeight="25.0" prefWidth="108.0" />
+      <ComboBox layoutX="766.0" layoutY="181.0" prefHeight="25.0" prefWidth="108.0" />
+      <ComboBox layoutX="766.0" layoutY="209.0" prefHeight="25.0" prefWidth="108.0" />
+      <ComboBox layoutX="766.0" layoutY="238.0" prefHeight="25.0" prefWidth="108.0" />
+      <Label fx:id="lbUnspentPoints" layoutX="980.0" layoutY="67.0" onDragDetected="#pointTotalCalculate" />
+      <TextField layoutX="912.0" layoutY="152.0" prefHeight="25.0" prefWidth="211.0" />
+      <TextField layoutX="912.0" layoutY="181.0" prefHeight="25.0" prefWidth="211.0" />
+      <TextField layoutX="912.0" layoutY="209.0" prefHeight="25.0" prefWidth="211.0" />
+      <TextField layoutX="912.0" layoutY="238.0" prefHeight="25.0" prefWidth="211.0" />
+      <Label layoutX="913.0" layoutY="119.0" text="Cultural Familiarities">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="stCost121112" layoutX="1129.0" layoutY="153.0" text="Cost" />
+      <Label fx:id="stCost1211112" layoutX="1129.0" layoutY="181.0" text="Cost" />
+      <Label fx:id="stCost12111112" layoutX="1129.0" layoutY="211.0" text="Cost" />
+      <Label fx:id="stCost121111111" layoutX="1129.0" layoutY="240.0" text="Cost" />
+      <Label layoutX="1104.0" layoutY="119.0" text="TL:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField layoutX="1131.0" layoutY="122.0" prefHeight="25.0" prefWidth="60.0" />
+      <Label layoutX="278.0" layoutY="142.0" text="Dodge:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="278.0" layoutY="172.0" text="Parry:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="278.0" layoutY="204.0" text="Block:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="stCost1212" layoutX="346.0" layoutY="144.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="stCost12121" layoutX="346.0" layoutY="175.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="stCost121211" layoutX="347.0" layoutY="207.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="127.0" layoutY="268.0" prefHeight="40.0" prefWidth="38.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="156.0" layoutY="310.0" prefHeight="40.0" prefWidth="65.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="399.0" layoutY="310.0" prefHeight="40.0" prefWidth="50.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="424.0" layoutY="286.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="345.0" layoutY="273.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="35.0" layoutY="350.0" prefHeight="40.0" prefWidth="234.0" text="Advantages and Perks">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField layoutX="31.0" layoutY="390.0" prefHeight="25.0" prefWidth="246.0" />
+      <TextField layoutX="31.0" layoutY="417.0" prefHeight="25.0" prefWidth="246.0" />
+      <TextField layoutX="31.0" layoutY="443.0" prefHeight="25.0" prefWidth="246.0" />
+      <TextField layoutX="31.0" layoutY="469.0" prefHeight="25.0" prefWidth="246.0" />
+      <TextField layoutX="31.0" layoutY="495.0" prefHeight="25.0" prefWidth="246.0" />
+      <TextField layoutX="31.0" layoutY="521.0" prefHeight="25.0" prefWidth="246.0" />
+      <TextField layoutX="31.0" layoutY="547.0" prefHeight="25.0" prefWidth="246.0" />
+      <TextField layoutX="31.0" layoutY="573.0" prefHeight="25.0" prefWidth="246.0" />
+      <TextField layoutX="31.0" layoutY="599.0" prefHeight="25.0" prefWidth="246.0" />
+      <TextField layoutX="31.0" layoutY="625.0" prefHeight="25.0" prefWidth="246.0" />
+      <TextField layoutX="31.0" layoutY="651.0" prefHeight="25.0" prefWidth="246.0" />
+      <TextField layoutX="32.0" layoutY="677.0" prefHeight="25.0" prefWidth="246.0" />
+      <Label fx:id="stCost12211" layoutX="282.0" layoutY="364.0" text="Cost" />
+      <Label fx:id="stCost122111" layoutX="282.0" layoutY="394.0" />
+      <Label fx:id="stCost1221111" layoutX="282.0" layoutY="421.0" />
+      <Label fx:id="stCost12211111" layoutX="282.0" layoutY="447.0" />
+      <Label fx:id="stCost122111111" layoutX="282.0" layoutY="473.0" />
+      <Label fx:id="stCost1221111111" layoutX="282.0" layoutY="499.0" />
+      <Label fx:id="stCost12211111111" layoutX="282.0" layoutY="525.0" />
+      <Label fx:id="stCost122111111111" layoutX="282.0" layoutY="551.0" />
+      <Label fx:id="stCost1221111111111" layoutX="282.0" layoutY="577.0" />
+      <Label fx:id="stCost12211111111111" layoutX="282.0" layoutY="603.0" />
+      <Label fx:id="stCost122111111111111" layoutX="282.0" layoutY="629.0" />
+      <Label fx:id="stCost1221111111111111" layoutX="282.0" layoutY="655.0" />
+      <Label fx:id="stCost12211111111111111" layoutX="282.0" layoutY="681.0" />
+      <Label layoutX="324.0" layoutY="352.0" prefHeight="40.0" prefWidth="272.0" text="Disadvantages and Quirks">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField layoutX="320.0" layoutY="392.0" prefHeight="26.0" prefWidth="262.0" />
+      <TextField layoutX="320.0" layoutY="419.0" prefHeight="26.0" prefWidth="262.0" />
+      <TextField layoutX="320.0" layoutY="445.0" prefHeight="26.0" prefWidth="262.0" />
+      <TextField layoutX="320.0" layoutY="471.0" prefHeight="26.0" prefWidth="262.0" />
+      <TextField layoutX="320.0" layoutY="497.0" prefHeight="26.0" prefWidth="262.0" />
+      <TextField layoutX="320.0" layoutY="523.0" prefHeight="26.0" prefWidth="262.0" />
+      <TextField layoutX="320.0" layoutY="549.0" prefHeight="26.0" prefWidth="262.0" />
+      <TextField layoutX="320.0" layoutY="575.0" prefHeight="26.0" prefWidth="262.0" />
+      <TextField layoutX="320.0" layoutY="601.0" prefHeight="26.0" prefWidth="262.0" />
+      <TextField layoutX="320.0" layoutY="627.0" prefHeight="26.0" prefWidth="262.0" />
+      <TextField layoutX="320.0" layoutY="653.0" prefHeight="26.0" prefWidth="262.0" />
+      <TextField layoutX="321.0" layoutY="679.0" prefHeight="26.0" prefWidth="262.0" />
+      <Label fx:id="stCost122112" layoutX="599.0" layoutY="366.0" text="Cost" />
+      <Label layoutX="641.0" layoutY="266.0" prefHeight="40.0" prefWidth="48.0" text="Skills">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField layoutX="637.0" layoutY="306.0" prefHeight="25.0" prefWidth="246.0" />
+      <TextField layoutX="637.0" layoutY="333.0" prefHeight="25.0" prefWidth="246.0" />
+      <TextField layoutX="637.0" layoutY="359.0" prefHeight="25.0" prefWidth="246.0" />
+      <TextField layoutX="637.0" layoutY="385.0" prefHeight="25.0" prefWidth="246.0" />
+      <TextField layoutX="637.0" layoutY="411.0" prefHeight="25.0" prefWidth="246.0" />
+      <TextField layoutX="637.0" layoutY="437.0" prefHeight="25.0" prefWidth="246.0" />
+      <TextField layoutX="637.0" layoutY="463.0" prefHeight="25.0" prefWidth="246.0" />
+      <TextField layoutX="637.0" layoutY="489.0" prefHeight="25.0" prefWidth="246.0" />
+      <TextField layoutX="637.0" layoutY="515.0" prefHeight="25.0" prefWidth="246.0" />
+      <TextField layoutX="637.0" layoutY="541.0" prefHeight="25.0" prefWidth="246.0" />
+      <TextField layoutX="637.0" layoutY="567.0" prefHeight="25.0" prefWidth="246.0" />
+      <TextField layoutX="638.0" layoutY="593.0" prefHeight="25.0" prefWidth="246.0" />
+      <Label fx:id="stCost122113" layoutX="952.0" layoutY="280.0" text="Cost" />
+      <Label fx:id="stCost1221113" layoutX="952.0" layoutY="310.0" />
+      <Label fx:id="stCost12211113" layoutX="952.0" layoutY="337.0" />
+      <Label fx:id="stCost122111113" layoutX="952.0" layoutY="363.0" />
+      <Label fx:id="stCost1221111113" layoutX="952.0" layoutY="389.0" />
+      <Label fx:id="stCost12211111113" layoutX="952.0" layoutY="415.0" />
+      <Label fx:id="stCost122111111113" layoutX="952.0" layoutY="441.0" />
+      <Label fx:id="stCost1221111111113" layoutX="952.0" layoutY="467.0" />
+      <Label fx:id="stCost12211111111113" layoutX="952.0" layoutY="493.0" />
+      <Label fx:id="stCost122111111111113" layoutX="952.0" layoutY="519.0" />
+      <Label fx:id="stCost1221111111111113" layoutX="952.0" layoutY="545.0" />
+      <Label fx:id="stCost12211111111111113" layoutX="952.0" layoutY="571.0" />
+      <Label fx:id="stCost122111111111111112" layoutX="952.0" layoutY="597.0" />
+      <TextField layoutX="638.0" layoutY="619.0" prefHeight="25.0" prefWidth="246.0" />
+      <TextField layoutX="637.0" layoutY="645.0" prefHeight="25.0" prefWidth="246.0" />
+      <TextField layoutX="638.0" layoutY="671.0" prefHeight="25.0" prefWidth="246.0" />
+      <Label fx:id="stCost1221111111111111121" layoutX="954.0" layoutY="623.0" />
+      <Label fx:id="stCost12211111111111111211" layoutX="954.0" layoutY="649.0" />
+      <Label fx:id="stCost122111111111111112111" layoutX="954.0" layoutY="675.0" />
+      <Label layoutX="889.0" layoutY="267.0" prefHeight="40.0" prefWidth="53.0" text="Level">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField layoutX="891.0" layoutY="307.0" prefHeight="25.0" prefWidth="53.0" />
+      <TextField layoutX="891.0" layoutY="334.0" prefHeight="25.0" prefWidth="53.0" />
+      <TextField layoutX="891.0" layoutY="360.0" prefHeight="25.0" prefWidth="53.0" />
+      <TextField layoutX="891.0" layoutY="386.0" prefHeight="25.0" prefWidth="53.0" />
+      <TextField layoutX="891.0" layoutY="412.0" prefHeight="25.0" prefWidth="53.0" />
+      <TextField layoutX="891.0" layoutY="438.0" prefHeight="25.0" prefWidth="53.0" />
+      <TextField layoutX="891.0" layoutY="464.0" prefHeight="25.0" prefWidth="53.0" />
+      <TextField layoutX="891.0" layoutY="490.0" prefHeight="25.0" prefWidth="53.0" />
+      <TextField layoutX="891.0" layoutY="516.0" prefHeight="25.0" prefWidth="53.0" />
+      <TextField layoutX="891.0" layoutY="542.0" prefHeight="25.0" prefWidth="53.0" />
+      <TextField layoutX="891.0" layoutY="568.0" prefHeight="25.0" prefWidth="53.0" />
+      <TextField layoutX="892.0" layoutY="594.0" prefHeight="25.0" prefWidth="53.0" />
+      <TextField layoutX="892.0" layoutY="620.0" prefHeight="25.0" prefWidth="53.0" />
+      <TextField layoutX="891.0" layoutY="646.0" prefHeight="25.0" prefWidth="53.0" />
+      <TextField layoutX="892.0" layoutY="672.0" prefHeight="25.0" prefWidth="53.0" />
+      <Label layoutX="1020.0" layoutY="269.0" prefHeight="40.0" prefWidth="145.0" text="Point Summary">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="990.0" layoutY="300.0" prefHeight="40.0" prefWidth="65.0" text="Attributes">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="990.0" layoutY="326.0" prefHeight="40.0" prefWidth="179.0" text="Advantages">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="990.0" layoutY="351.0" prefHeight="40.0" prefWidth="179.0" text="Disadvantages">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="990.0" layoutY="376.0" prefHeight="40.0" prefWidth="179.0" text="Skills">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="stCost12211131" layoutX="1157.0" layoutY="312.0" />
+      <Label fx:id="stCost122111311" layoutX="1157.0" layoutY="337.0" />
+      <Label fx:id="stCost1221113111" layoutX="1157.0" layoutY="366.0" />
+      <Label fx:id="stCost12211131111" layoutX="1157.0" layoutY="389.0" />
+   </children>
+</AnchorPane>
