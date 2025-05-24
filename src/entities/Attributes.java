@@ -44,7 +44,7 @@ public class Attributes extends Data {
   }
 
   public void settingBasicSpeed() {
-    this.basicSpeed = (dx + ht) / 4;
+    this.basicSpeed = (((double) dx + (double) ht) / 4);
   }
 
   public void settingBasicMove() {
@@ -251,13 +251,12 @@ public class Attributes extends Data {
     this.unspentPoints = unspentPoints;
   }
 
-public int getTl() {
-	return tl;
-}
+  public int getTl() {
+    return tl;
+  }
 
-public void setTl(int tl) {
-	this.tl = tl;
-}
-  
+  public void setTl(int tl) {
+    this.tl = tl;
+  }
 
 }

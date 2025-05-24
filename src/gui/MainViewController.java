@@ -423,7 +423,7 @@ public class MainViewController extends Attributes {
     willSet.setText(iqSet.getText());
     perSet.setText(iqSet.getText());
     fpSet.setText(htSet.getText());
-    bSpeedSet.setText(String.valueOf(getBasicSpeed()));
+    bSpeedSet.setText(String.format("%.2f", (getBasicSpeed())));
     bMoveSet.setText(String.valueOf(getBasicMove()));
     lbDodge.setText(String.valueOf(getBasicMove()));
     lbBasicLift.setText(String.valueOf(getBasicLift()));
@@ -483,11 +483,11 @@ public class MainViewController extends Attributes {
     setDx(Integer.parseInt(dxSet.getText()));
     settingBasicSpeed();
     settingBasicMove();
-    bSpeedCalculate();
-    bMoveCalculate();
     bSpeedSet.setText(String.valueOf(getBasicSpeed()));
     bMoveSet.setText(String.valueOf(getBasicMove()));
     lbDodge.setText(String.valueOf(getBasicMove()));
+    bSpeedCalculate();
+    bMoveCalculate();
     if (Integer.parseInt(dxSet.getText()) > 10) {
       setDxPoints((Integer.parseInt(dxSet.getText()) - 10) * 20);
       dxCost.setText(String.valueOf(getDxPoints()));
@@ -536,11 +536,11 @@ public class MainViewController extends Attributes {
     fpCalculate();
     settingBasicSpeed();
     settingBasicMove();
-    bSpeedCalculate();
-    bMoveCalculate();
     bSpeedSet.setText(String.valueOf(getBasicSpeed()));
     bMoveSet.setText(String.valueOf(getBasicMove()));
     lbDodge.setText(String.valueOf(getBasicMove()));
+    bSpeedCalculate();
+    bMoveCalculate();
     if (Integer.parseInt(htSet.getText()) > 10) {
       setHtPoints((Integer.parseInt(htSet.getText()) - 10) * 10);
       htCost.setText(String.valueOf(getHtPoints()));
@@ -638,31 +638,35 @@ public class MainViewController extends Attributes {
   }
 
   public void bSpeedCalculate() {
-	  settingBasicSpeed(); 
+    settingBasicSpeed();
     if (Double.parseDouble(bSpeedSet.getText()) > getBasicSpeed()) {
       Double tempCalc = (((Double.parseDouble(bSpeedSet.getText()) - getBasicSpeed())) / 0.25) * 5;
       int fnBspeedPoints = (int) Math.round(tempCalc);
       bSpeedCost.setText(String.valueOf(fnBspeedPoints));
       setBasicSpeedPoints(Integer.parseInt(bSpeedCost.getText()));
       settingUnspentPoints();
+      lbUnspentPoints.setText(String.valueOf(getUnspentPoints()));
     } else {
       setBasicSpeedPoints(0);
       bSpeedCost.setText("0");
       settingUnspentPoints();
+      lbUnspentPoints.setText(String.valueOf(getUnspentPoints()));
     }
   }
 
   public void bMoveCalculate() {
-	  settingBasicMove();
-	  lbDodge.setText(String.valueOf(getBasicMove()));
+    settingBasicMove();
+    lbDodge.setText(String.valueOf(getBasicMove()));
     if ((Integer.parseInt(bMoveSet.getText()) > getBasicMove())) {
       setBasicMovePoints((Integer.parseInt(bMoveSet.getText()) - getBasicMove()) * 5);
       bMoveCost.setText(String.valueOf(getBasicMovePoints()));
       settingUnspentPoints();
+      lbUnspentPoints.setText(String.valueOf(getUnspentPoints()));
     } else {
       setBasicMovePoints(0);
       bMoveCost.setText("0");
       settingUnspentPoints();
+      lbUnspentPoints.setText(String.valueOf(getUnspentPoints()));
     }
   }
 
