@@ -1,5 +1,7 @@
 package gui;
 
+import java.text.NumberFormat;
+
 import entities.Attributes;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -7,7 +9,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class MainViewController extends Attributes {
-
+  // FXML correspondence of each element on the frontend: TextFields, Labels and
+  // Button
   @FXML
   TextField stSet;
 
@@ -415,144 +418,337 @@ public class MainViewController extends Attributes {
 
   // Basic values for text fields and labels
   public void initialize() {
-    stSet.setText(String.valueOf(getSt()));
+    stSet.setText(String.valueOf(getSt())); // Initial values found in Attributes.java
     dxSet.setText(String.valueOf(getDx()));
     iqSet.setText(String.valueOf(getIq()));
     htSet.setText(String.valueOf(getHt()));
-    hpSet.setText(stSet.getText());
-    willSet.setText(iqSet.getText());
-    perSet.setText(iqSet.getText());
-    fpSet.setText(htSet.getText());
-    bSpeedSet.setText(String.format("%.2f", (getBasicSpeed())));
-    bMoveSet.setText(String.valueOf(getBasicMove()));
-    lbDodge.setText(String.valueOf(getBasicMove()));
-    lbBasicLift.setText(String.valueOf(getBasicLift()));
-    ptTotalSet.setText(String.valueOf(getPointTotal()));
-    pointTotalCalculate();
-    stCalculate();
-    dxCalculate();
-    iqCalculate();
-    htCalculate();
-    hpCalculate();
-    willCalculate();
-    perCalculate();
-    fpCalculate();
-    settingBasicMove();
-    settingBasicSpeed();
-    settingBasicLift();
-    bSpeedCalculate();
-    bMoveCalculate();
+    hpSet.setText(stSet.getText()); // In GURPS, initial hp = st
+    willSet.setText(iqSet.getText()); // In GURPS, initial will = iq
+    perSet.setText(iqSet.getText()); // In GURPS, initial per = iq
+    fpSet.setText(htSet.getText()); // In GURPS, initial fp = ht
+    bSpeedSet.setText(String.format("%.2f", (getBasicSpeed()))); // Basic speed can have decimal places
+    bMoveSet.setText(String.valueOf(getBasicMove())); // Basic move is rounded down
+    lbDodge.setText(String.valueOf(getBasicMove())); // Base dodge is based on Basic Move
+    lbBasicLift.setText(String.valueOf(getBasicLift())); // Basic lift has specific calculation
+    ptTotalSet.setText(String.valueOf(getPointTotal())); // Method to get total points for the character, defined by
+                                                         // user
+    // Listeners to check values in real time
+    stSet.textProperty().addListener((observable, oldValue, newValue) -> {
+      stSet.setStyle("");
+      if (newValue == null || newValue.trim().isEmpty()) { // Validating empty entries. The same method is applied for
+                                                           // the remaining attributes
+
+        stSet.setStyle("-fx-border-color: orange;");
+        return;
+      }
+      if (!newValue.matches("\\d+")) {
+        stSet.setText(oldValue);
+        stSet.setStyle("-fx-border-color: red;");
+        return;
+      }
+      int parsedSt; // Temporary variable to store current attribute value
+      parsedSt = Integer.parseInt(newValue);
+      // Attributes can't be less than 1
+      if (parsedSt < 1) {
+        stSet.setText("1");
+        stSet.setStyle("-fx-border-color: red;");
+      } else {
+        stSet.setStyle("-fx-border-color: green;");
+      }
+    });
+
+    dxSet.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue == null || newValue.trim().isEmpty()) {
+        dxSet.setStyle("-fx-border-color: orange;");
+        return;
+      }
+      if (!newValue.matches("\\d+")) {
+        dxSet.setText(oldValue);
+        dxSet.setStyle("-fx-border-color: red;");
+        return;
+      }
+      int parsedDx;
+      parsedDx = Integer.parseInt(newValue);
+      if (parsedDx < 1) {
+        dxSet.setText("1");
+        dxSet.setStyle("-fx-border-color: red;");
+      } else {
+        dxSet.setStyle("-fx-border-color: green;");
+      }
+    });
+
+    iqSet.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue == null || newValue.trim().isEmpty()) {
+        iqSet.setStyle("-fx-border-color: orange;");
+        return;
+      }
+      if (!newValue.matches("\\d+")) {
+        iqSet.setText(oldValue);
+        iqSet.setStyle("-fx-border-color: red;");
+        return;
+      }
+      int parsedIq;
+      parsedIq = Integer.parseInt(newValue);
+      if (parsedIq < 1) {
+        iqSet.setText("1");
+        iqSet.setStyle("-fx-border-color: red;");
+      } else {
+        iqSet.setStyle("-fx-border-color: green;");
+      }
+    });
+
+    htSet.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue == null || newValue.trim().isEmpty()) {
+        htSet.setStyle("-fx-border-color: orange;");
+        return;
+      }
+      if (!newValue.matches("\\d+")) {
+        htSet.setText(oldValue);
+        htSet.setStyle("-fx-border-color: red;");
+        return;
+      }
+      int parsedHt;
+      parsedHt = Integer.parseInt(newValue);
+      if (parsedHt < 1) {
+        htSet.setText("1");
+        htSet.setStyle("-fx-border-color: red;");
+      } else {
+        htSet.setStyle("-fx-border-color: green;");
+      }
+    });
+
+    hpSet.textProperty().addListener((observable, oldValue, newValue) -> {
+      hpSet.setStyle("");
+      if (newValue == null || newValue.trim().isEmpty()) {
+        hpSet.setStyle("-fx-border-color: orange;");
+        return;
+      }
+      if (!newValue.matches("\\d+")) {
+        hpSet.setText(oldValue);
+        hpSet.setStyle("-fx-border-color: red;");
+        return;
+      }
+
+    });
+
+    willSet.textProperty().addListener((observable, oldValue, newValue) -> {
+      willSet.setStyle("");
+      if (newValue == null || newValue.trim().isEmpty()) {
+        willSet.setStyle("-fx-border-color: orange;");
+        return;
+      }
+      if (!newValue.matches("\\d+")) {
+        willSet.setText(oldValue);
+        willSet.setStyle("-fx-border-color: red;");
+        return;
+      }
+    });
+
+    perSet.textProperty().addListener((observable, oldValue, newValue) -> {
+      perSet.setStyle("");
+      if (newValue == null || newValue.trim().isEmpty()) {
+        perSet.setStyle("-fx-border-color: orange;");
+        return;
+      }
+      if (!newValue.matches("\\d+")) {
+        perSet.setText(oldValue);
+        perSet.setStyle("-fx-border-color: red;");
+        return;
+      }
+
+    });
+
+    fpSet.textProperty().addListener((observable, oldValue, newValue) -> {
+      fpSet.setStyle("");
+      if (newValue == null || newValue.trim().isEmpty()) {
+        fpSet.setStyle("-fx-border-color: orange;");
+        return;
+      }
+      if (!newValue.matches("\\d+")) {
+        fpSet.setText(oldValue);
+        fpSet.setStyle("-fx-border-color: red;");
+        return;
+      }
+
+    });
+
+    // Basic calculation calls
+    pointTotalCalculate(); // Method to keep track of spending/remaining character points
+    stCalculate(); // ST points and sub-attributes calculation
+    dxCalculate(); // DX points calculation and basic speed and move
+    iqCalculate(); // IQ points calculation, as well as base will and per
+    htCalculate(); // HT points calculation and base HP
+    hpCalculate(); // HP points calculation if HP is higher than ST
+    willCalculate(); // will points calculation if will is higher than IQ
+    perCalculate(); // per points calculation if per is higher than IQ
+    fpCalculate(); // fatigue points calculation if FP is higher than HT
+    settingBasicMove(); // Starting Basic Move value
+    settingBasicSpeed(); // Starting Basic Speed value
+    settingBasicLift(); // Starting Basic Lift value
+    bSpeedCalculate(); // Calling extra speed points if any
+    bMoveCalculate(); // Calling extra move points if any
 
   }
 
   // Total character points calculation
   public void pointTotalCalculate() {
-    lbUnspentPoints.setText(ptTotalSet.getText());
-    setPointTotal(Integer.parseInt(ptTotalSet.getText()));
-    settingUnspentPoints();
-    lbUnspentPoints.setText(String.valueOf(getUnspentPoints()));
+    lbUnspentPoints.setText(ptTotalSet.getText()); // Label of unspent points receives the point total determined user
+    setPointTotal(Integer.parseInt(ptTotalSet.getText())); // Value, once a String, parsed to Integer
+    settingUnspentPoints(); // Call method from Attributes class
+    lbUnspentPoints.setText(String.valueOf(getUnspentPoints())); // Set the final value for the label
   }
 
   // Attributes points calculation
-  public void stCalculate() {
-    setSt(Integer.parseInt(stSet.getText()));
-    settingBasicLift();
-    lbBasicLift.setText(String.valueOf(getBasicLift()));
-    if (Integer.parseInt(stSet.getText()) > 10) {
-      hpSet.setText(stSet.getText());
-      hpCalculate();
-      setStPoints((Integer.parseInt(stSet.getText()) - 10) * 10);
-      stCost.setText(String.valueOf(getStPoints()));
-      settingUnspentPoints();
-      lbUnspentPoints.setText(String.valueOf(getUnspentPoints()));
 
-    } else if (Integer.parseInt(stSet.getText()) < 1) {
-      stSet.setText("1");
-    } else {
-      hpSet.setText(stSet.getText());
-      hpCalculate();
-      setStPoints((10 - Integer.parseInt(stSet.getText())) * -10);
-      stCost.setText(String.valueOf(getStPoints()));
-      settingUnspentPoints();
+  // This method calculates character points spent (or acquired) from the ST
+  // It also determines the initial hp
+  public void stCalculate() {
+    try {
+
+      int currentSt = Integer.parseInt(stSet.getText()); // Getting the TextField value and storing in a local variable
+      setSt(currentSt); // Updating ST Label with current value
+      settingBasicLift(); // Calling method to calculate Basic Lift
+      lbBasicLift.setText(String.valueOf(getBasicLift())); // Updating Basic Lift label
+
+      if (currentSt > 10) { // if the player is "buying" a value above 10
+        hpSet.setText(String.valueOf(currentSt)); // set the corresponding hp
+        hpCalculate(); // call the hp calculation
+        setStPoints((currentSt - 10) * 10); // formula to get the amount of points for St above 10
+        stCost.setText(String.valueOf(getStPoints())); // update amount on the st cost label
+        settingUnspentPoints(); // update points total
+        lbUnspentPoints.setText(String.valueOf(getUnspentPoints())); // update label of unspent points
+
+      } else if (currentSt < 1) { // attributes don't go below 1 in GURPS.
+        stSet.setText("1");
+
+      } else {
+        hpSet.setText(stSet.getText()); // hp update again, but this time for values below 10
+        hpCalculate();
+        setStPoints((10 - currentSt) * -10); // formula for negative values
+        stCost.setText(String.valueOf(getStPoints()));
+        settingUnspentPoints();
+        lbUnspentPoints.setText(String.valueOf(getUnspentPoints()));
+      }
+    } catch (NumberFormatException e) {
+      // Recovery action in case of exception
+      stSet.setStyle("-fx-border-color: red;"); // a graphic representation of a red border on the text field
+      stCost.setText("0"); // reset cost label
+      setSt(1); // reset St
+      hpCalculate(); // calculate base hp again
+      settingUnspentPoints(); // also calculate points
       lbUnspentPoints.setText(String.valueOf(getUnspentPoints()));
     }
 
   }
 
   public void dxCalculate() {
-    setDx(Integer.parseInt(dxSet.getText()));
-    settingBasicSpeed();
-    settingBasicMove();
-    bSpeedSet.setText(String.valueOf(getBasicSpeed()));
-    bMoveSet.setText(String.valueOf(getBasicMove()));
-    lbDodge.setText(String.valueOf(getBasicMove()));
-    bSpeedCalculate();
-    bMoveCalculate();
-    if (Integer.parseInt(dxSet.getText()) > 10) {
-      setDxPoints((Integer.parseInt(dxSet.getText()) - 10) * 20);
-      dxCost.setText(String.valueOf(getDxPoints()));
-      settingUnspentPoints();
-      lbUnspentPoints.setText(String.valueOf(getUnspentPoints()));
-    } else if (Integer.parseInt(dxSet.getText()) < 1) {
-      dxSet.setText("1");
-    } else {
-      setDxPoints((10 - Integer.parseInt(dxSet.getText())) * -20);
-      dxCost.setText(String.valueOf(getDxPoints()));
-      settingUnspentPoints();
-      lbUnspentPoints.setText(String.valueOf(getUnspentPoints()));
-    }
+    try {
+      int currentDx = Integer.parseInt(dxSet.getText()); // temp variable to store value
+      setDx(currentDx); // setting Dx textfield
+      settingBasicSpeed(); // calling Basic Speed calculation and Basic Move calculation
+      settingBasicMove(); // they're needed everytime Dx changes and correspond to the basic values of
+                          // each
+      bSpeedSet.setText(String.valueOf(getBasicSpeed())); // updating textfields
+      bMoveSet.setText(String.valueOf(getBasicMove()));
+      lbDodge.setText(String.valueOf(getBasicMove()));
+      bSpeedCalculate(); // here's the method to get spent points on each attribute
+      bMoveCalculate();
 
+      if (currentDx > 10) { // the same if chain that validates the amount of points spent for each
+                            // attribute, here, Dx
+        setDxPoints((currentDx - 10) * 20); // Values above 10
+        dxCost.setText(String.valueOf(getDxPoints()));
+        settingUnspentPoints();
+        lbUnspentPoints.setText(String.valueOf(getUnspentPoints()));
+      } else if (currentDx < 1) {
+        dxSet.setText("1");
+      } else {
+        setDxPoints((10 - currentDx) * -20);
+        dxCost.setText(String.valueOf(getDxPoints()));
+        settingUnspentPoints();
+        lbUnspentPoints.setText(String.valueOf(getUnspentPoints()));
+      }
+
+    } catch (NumberFormatException e) {
+      dxSet.setStyle("-fx-border-color: red;");
+      dxCost.setText("1");
+      setDx(1);
+      bSpeedCalculate();
+      bMoveCalculate();
+    }
   }
 
   public void iqCalculate() {
-    setIq(Integer.parseInt(iqSet.getText()));
-    if (Integer.parseInt(iqSet.getText()) > 10) {
-      willSet.setText(iqSet.getText());
-      perSet.setText(iqSet.getText());
+    try {
+      int currentIq = Integer.parseInt(iqSet.getText());
+      setIq(currentIq);
+      if (currentIq > 10) {
+        willSet.setText(iqSet.getText());
+        perSet.setText(iqSet.getText());
+        willCalculate();
+        perCalculate();
+        setIqPoints((currentIq - 10) * 20);
+        iqCost.setText(String.valueOf(getIqPoints()));
+        settingUnspentPoints();
+        lbUnspentPoints.setText(String.valueOf(getUnspentPoints()));
+      } else if (currentIq < 1) {
+        iqSet.setText("1");
+      } else {
+        willSet.setText(iqSet.getText());
+        perSet.setText(iqSet.getText());
+        willCalculate();
+        perCalculate();
+        setIqPoints((10 - currentIq) * -20);
+        iqCost.setText(String.valueOf(getIqPoints()));
+        settingUnspentPoints();
+        lbUnspentPoints.setText(String.valueOf(getUnspentPoints()));
+      }
+
+    } catch (NumberFormatException e) {
+      iqSet.setStyle("-fx-border-color: red;");
+      iqCost.setText("0");
+      setIq(1);
       willCalculate();
       perCalculate();
-      setIqPoints((Integer.parseInt(iqSet.getText()) - 10) * 20);
-      iqCost.setText(String.valueOf(getIqPoints()));
-      settingUnspentPoints();
-      lbUnspentPoints.setText(String.valueOf(getUnspentPoints()));
-    } else if (Integer.parseInt(iqSet.getText()) < 1) {
-      iqSet.setText("1");
-    } else {
-      willSet.setText(iqSet.getText());
-      perSet.setText(iqSet.getText());
-      willCalculate();
-      perCalculate();
-      setIqPoints((10 - Integer.parseInt(iqSet.getText())) * -20);
-      iqCost.setText(String.valueOf(getIqPoints()));
-      settingUnspentPoints();
       lbUnspentPoints.setText(String.valueOf(getUnspentPoints()));
     }
-
   }
 
   public void htCalculate() {
-    fpSet.setText(htSet.getText());
-    setHt(Integer.parseInt(htSet.getText()));
-    fpCalculate();
-    settingBasicSpeed();
-    settingBasicMove();
-    bSpeedSet.setText(String.valueOf(getBasicSpeed()));
-    bMoveSet.setText(String.valueOf(getBasicMove()));
-    lbDodge.setText(String.valueOf(getBasicMove()));
-    bSpeedCalculate();
-    bMoveCalculate();
-    if (Integer.parseInt(htSet.getText()) > 10) {
-      setHtPoints((Integer.parseInt(htSet.getText()) - 10) * 10);
-      htCost.setText(String.valueOf(getHtPoints()));
-      settingUnspentPoints();
+    try {
+      int currentHt = Integer.parseInt(htSet.getText());
+      fpSet.setText(htSet.getText());
+      setHt(currentHt);
+      fpCalculate();
+      settingBasicSpeed();
+      settingBasicMove();
+      bSpeedSet.setText(String.valueOf(getBasicSpeed()));
+      bMoveSet.setText(String.valueOf(getBasicMove()));
+      lbDodge.setText(String.valueOf(getBasicMove()));
+      bSpeedCalculate();
+      bMoveCalculate();
+      if (currentHt > 10) {
+        setHtPoints((currentHt - 10) * 10);
+        htCost.setText(String.valueOf(getHtPoints()));
+        settingUnspentPoints();
+        lbUnspentPoints.setText(String.valueOf(getUnspentPoints()));
+      } else if (currentHt < 1) {
+        htSet.setText("1");
+      } else {
+        setHtPoints((10 - currentHt) * -10);
+        htCost.setText(String.valueOf(getHtPoints()));
+        settingUnspentPoints();
+        lbUnspentPoints.setText(String.valueOf(getUnspentPoints()));
+      }
+
+    } catch (NumberFormatException e) {
+      htSet.setStyle("-fx-border-color: red;");
+      htCost.setText("0");
+      fpCalculate();
+      settingBasicSpeed();
+      settingBasicMove();
       lbUnspentPoints.setText(String.valueOf(getUnspentPoints()));
-    } else if (Integer.parseInt(htSet.getText()) < 1) {
-      htSet.setText("0");
-    } else {
-      setHtPoints((10 - Integer.parseInt(htSet.getText())) * -10);
-      htCost.setText(String.valueOf(getHtPoints()));
-      settingUnspentPoints();
-      lbUnspentPoints.setText(String.valueOf(getUnspentPoints()));
+
     }
 
   }
