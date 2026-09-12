@@ -1,16 +1,25 @@
 package gui;
 
-import java.text.NumberFormat;
-
 import entities.Attributes;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.collections.FXCollections;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.collections.*;
+import javafx.fxml.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.lang.Iterable;
+import java.util.ArrayList;
+import javafx.scene.control.TextInputControl;
 
 public class MainViewController extends Attributes {
-  // FXML correspondence of each element on the frontend: TextFields, Labels and
-  // Button
+  // * FXML correspondence of each element on the frontend: TextFields, Labels,
+  // etc.
+
   @FXML
   TextField stSet;
 
@@ -416,161 +425,140 @@ public class MainViewController extends Attributes {
   @FXML
   Button btPsiMagic;
 
-  // Basic values for text fields and labels
+  @FXML
+  ComboBox<Languages> spoken1;
+
+  @FXML
+  ComboBox<Languages> spoken2;
+
+  @FXML
+  ComboBox<Languages> spoken3;
+
+  @FXML
+  ComboBox<Languages> spoken4;
+
+  @FXML
+  ComboBox<Languages> written1;
+
+  @FXML
+  ComboBox<Languages> written2;
+
+  @FXML
+  ComboBox<Languages> written3;
+
+  @FXML
+  ComboBox<Languages> written4;
+
+  private void bindAttr(TextInputControl field, Object initialValue, Runnable onCalculate) { // Listener, protector and
+                                                                                             // binder o attr
+    field.setText(String.valueOf(initialValue));
+    field.setStyle("-fx-border-color: green;");
+
+    field.textProperty().addListener((obs, oldValue, newValue) -> {
+      if (newValue == null || newValue.trim().isEmpty()) {
+        field.setStyle("-fx-border-color: orange;");
+        return;
+      }
+
+      if (!newValue.matches("\\d+")) {
+        field.setText(oldValue);
+        return;
+      }
+
+      try {
+        int value = Integer.parseInt(newValue);
+
+        if (value >= 1) {
+          field.setStyle("-fx-border-color: green;");
+          onCalculate.run(); // Executa o cálculo imediatamente a cada dígito!
+        } else {
+          field.setStyle("-fx-border-color: red;");
+        }
+      } catch (NumberFormatException e) {
+        field.setStyle("-fx-border-color: red;");
+      }
+    });
+
+    field.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
+      if (!isNowFocused) { // Quando o campo perde o foco
+        String text = field.getText();
+        if (text == null || text.trim().isEmpty() || Integer.parseInt(text.trim()) < 1) {
+          field.setText("1"); // Restaura o mínimo do GURPS
+          field.setStyle("-fx-border-color: green;");
+          onCalculate.run();
+        }
+      }
+    });
+  }
+
+  public void dmgRegister() { // Damage table in progress
+
+    gdpDmgTable.put(1, "1d-6");
+    gdpDmgTable.put(2, "1d-6");
+    gdpDmgTable.put(3, "1d-6");
+    gdpDmgTable.put(4, "1d-6");
+    gdpDmgTable.put(5, "1d-6");
+    gdpDmgTable.put(6, "1d-6");
+    gdpDmgTable.put(7, "1d-6");
+    gdpDmgTable.put(8, "1d-6");
+    gdpDmgTable.put(9, "1d-6");
+    gdpDmgTable.put(10, "1d-6");
+    gdpDmgTable.put(11, "1d-6");
+    gdpDmgTable.put(12, "1d-6");
+    gdpDmgTable.put(13, "1d-6");
+    gdpDmgTable.put(14, "1d-6");
+    gdpDmgTable.put(15, "1d-6");
+    gdpDmgTable.put(16, "1d-5");
+    gdpDmgTable.put(17, "1d-5");
+    gdpDmgTable.put(18, "1d-5");
+    gdpDmgTable.put(19, "1d-5");
+    gdpDmgTable.put(20, "1d-5");
+    gdpDmgTable.put(21, "1d-5");
+    gdpDmgTable.put(22, "1d-5");
+    gdpDmgTable.put(23, "1d-5");
+    gdpDmgTable.put(24, "1d-5");
+    gdpDmgTable.put(25, "1d-5");
+    gdpDmgTable.put(26, "1d-5");
+    gdpDmgTable.put(27, "1d-5");
+    gdpDmgTable.put(28, "1d-5");
+    gdpDmgTable.put(29, "1d-5");
+    gdpDmgTable.put(30, "1d-5");
+
+  }
+
+  public void updateDamageDisplay() { // Damage display in progress
+    try {
+      int currentSt = Integer.parseInt(stSet.getText());
+
+      String dmgGdp = gdpDmgTable.getOrDefault(currentSt, "ST fora da tabela");
+
+      setThurst.setText(dmgGdp);
+    } catch (NumberFormatException e) {
+      setThurst.setText("-");
+    }
+  }
+
   public void initialize() {
-    stSet.setText(String.valueOf(getSt())); // Initial values found in Attributes.java
-    dxSet.setText(String.valueOf(getDx()));
-    iqSet.setText(String.valueOf(getIq()));
-    htSet.setText(String.valueOf(getHt()));
-    hpSet.setText(stSet.getText()); // In GURPS, initial hp = st
-    willSet.setText(iqSet.getText()); // In GURPS, initial will = iq
-    perSet.setText(iqSet.getText()); // In GURPS, initial per = iq
-    fpSet.setText(htSet.getText()); // In GURPS, initial fp = ht
+
+    dmgRegister(); // Initialize Damage Table
+
+    bindAttr(stSet, getSt(), this::stCalculate);
+    bindAttr(dxSet, getDx(), this::dxCalculate);
+    bindAttr(iqSet, getIq(), this::iqCalculate);
+    bindAttr(htSet, getHt(), this::htCalculate);
+
+    updateDamageDisplay();
+
+    bindAttr(hpSet, stSet.getText(), this::hpCalculate);
+    bindAttr(willSet, iqSet.getText(), this::willCalculate);
+    bindAttr(perSet, iqSet.getText(), this::perCalculate);
+    bindAttr(fpSet, htSet.getText(), this::fpCalculate);
+
     bSpeedSet.setText(String.format("%.2f", (getBasicSpeed()))); // Basic speed can have decimal places
     bMoveSet.setText(String.valueOf(getBasicMove())); // Basic move is rounded down
-    lbDodge.setText(String.valueOf(getBasicMove())); // Base dodge is based on Basic Move
-    lbBasicLift.setText(String.valueOf(getBasicLift())); // Basic lift has specific calculation
-    ptTotalSet.setText(String.valueOf(getPointTotal())); // Method to get total points for the character, defined by
-                                                         // user
-    // Listeners to check values in real time
-    stSet.textProperty().addListener((observable, oldValue, newValue) -> {
-      stSet.setStyle("");
-      if (newValue == null || newValue.trim().isEmpty()) { // Validating empty entries. The same method is applied for
-                                                           // the remaining attributes
-
-        stSet.setStyle("-fx-border-color: orange;");
-        return;
-      }
-      if (!newValue.matches("\\d+")) {
-        stSet.setText(oldValue);
-        stSet.setStyle("-fx-border-color: red;");
-        return;
-      }
-      int parsedSt; // Temporary variable to store current attribute value
-      parsedSt = Integer.parseInt(newValue);
-      // Attributes can't be less than 1
-      if (parsedSt < 1) {
-        stSet.setText("1");
-        stSet.setStyle("-fx-border-color: red;");
-      } else {
-        stSet.setStyle("-fx-border-color: green;");
-      }
-    });
-
-    dxSet.textProperty().addListener((observable, oldValue, newValue) -> {
-      if (newValue == null || newValue.trim().isEmpty()) {
-        dxSet.setStyle("-fx-border-color: orange;");
-        return;
-      }
-      if (!newValue.matches("\\d+")) {
-        dxSet.setText(oldValue);
-        dxSet.setStyle("-fx-border-color: red;");
-        return;
-      }
-      int parsedDx;
-      parsedDx = Integer.parseInt(newValue);
-      if (parsedDx < 1) {
-        dxSet.setText("1");
-        dxSet.setStyle("-fx-border-color: red;");
-      } else {
-        dxSet.setStyle("-fx-border-color: green;");
-      }
-    });
-
-    iqSet.textProperty().addListener((observable, oldValue, newValue) -> {
-      if (newValue == null || newValue.trim().isEmpty()) {
-        iqSet.setStyle("-fx-border-color: orange;");
-        return;
-      }
-      if (!newValue.matches("\\d+")) {
-        iqSet.setText(oldValue);
-        iqSet.setStyle("-fx-border-color: red;");
-        return;
-      }
-      int parsedIq;
-      parsedIq = Integer.parseInt(newValue);
-      if (parsedIq < 1) {
-        iqSet.setText("1");
-        iqSet.setStyle("-fx-border-color: red;");
-      } else {
-        iqSet.setStyle("-fx-border-color: green;");
-      }
-    });
-
-    htSet.textProperty().addListener((observable, oldValue, newValue) -> {
-      if (newValue == null || newValue.trim().isEmpty()) {
-        htSet.setStyle("-fx-border-color: orange;");
-        return;
-      }
-      if (!newValue.matches("\\d+")) {
-        htSet.setText(oldValue);
-        htSet.setStyle("-fx-border-color: red;");
-        return;
-      }
-      int parsedHt;
-      parsedHt = Integer.parseInt(newValue);
-      if (parsedHt < 1) {
-        htSet.setText("1");
-        htSet.setStyle("-fx-border-color: red;");
-      } else {
-        htSet.setStyle("-fx-border-color: green;");
-      }
-    });
-
-    hpSet.textProperty().addListener((observable, oldValue, newValue) -> {
-      hpSet.setStyle("");
-      if (newValue == null || newValue.trim().isEmpty()) {
-        hpSet.setStyle("-fx-border-color: orange;");
-        return;
-      }
-      if (!newValue.matches("\\d+")) {
-        hpSet.setText(oldValue);
-        hpSet.setStyle("-fx-border-color: red;");
-        return;
-      }
-
-    });
-
-    willSet.textProperty().addListener((observable, oldValue, newValue) -> {
-      willSet.setStyle("");
-      if (newValue == null || newValue.trim().isEmpty()) {
-        willSet.setStyle("-fx-border-color: orange;");
-        return;
-      }
-      if (!newValue.matches("\\d+")) {
-        willSet.setText(oldValue);
-        willSet.setStyle("-fx-border-color: red;");
-        return;
-      }
-    });
-
-    perSet.textProperty().addListener((observable, oldValue, newValue) -> {
-      perSet.setStyle("");
-      if (newValue == null || newValue.trim().isEmpty()) {
-        perSet.setStyle("-fx-border-color: orange;");
-        return;
-      }
-      if (!newValue.matches("\\d+")) {
-        perSet.setText(oldValue);
-        perSet.setStyle("-fx-border-color: red;");
-        return;
-      }
-
-    });
-
-    fpSet.textProperty().addListener((observable, oldValue, newValue) -> {
-      fpSet.setStyle("");
-      if (newValue == null || newValue.trim().isEmpty()) {
-        fpSet.setStyle("-fx-border-color: orange;");
-        return;
-      }
-      if (!newValue.matches("\\d+")) {
-        fpSet.setText(oldValue);
-        fpSet.setStyle("-fx-border-color: red;");
-        return;
-      }
-
-    });
+    lbDodge.setText(String.valueOf(getBasicMove()));
+    lbBasicLift.setText(String.valueOf(getBasicLift()));
+    ptTotalSet.setText(String.valueOf(getPointTotal())); // Method to get total points for the character
 
     // Basic calculation calls
     pointTotalCalculate(); // Method to keep track of spending/remaining character points
@@ -590,15 +578,19 @@ public class MainViewController extends Attributes {
 
   }
 
-  // Total character points calculation
-  public void pointTotalCalculate() {
-    lbUnspentPoints.setText(ptTotalSet.getText()); // Label of unspent points receives the point total determined user
-    setPointTotal(Integer.parseInt(ptTotalSet.getText())); // Value, once a String, parsed to Integer
-    settingUnspentPoints(); // Call method from Attributes class
-    lbUnspentPoints.setText(String.valueOf(getUnspentPoints())); // Set the final value for the label
-  }
+  // Damage Tables' HashMaps
+  public Map<Integer, String> gdpDmgTable = new HashMap<>();
+  public Map<Integer, String> balDmgTable = new HashMap<>();
 
-  // Attributes points calculation
+  public void pointTotalCalculate() {
+    try {
+      setPointTotal(getPointTotal() - getUnspentPoints());
+      settingUnspentPoints();
+      lbUnspentPoints.setText(String.valueOf(getUnspentPoints()));
+    } catch (NumberFormatException e) {
+      lbUnspentPoints.setText("0");
+    }
+  }
 
   // This method calculates character points spent (or acquired) from the ST
   // It also determines the initial hp
@@ -628,6 +620,8 @@ public class MainViewController extends Attributes {
         stCost.setText(String.valueOf(getStPoints()));
         settingUnspentPoints();
         lbUnspentPoints.setText(String.valueOf(getUnspentPoints()));
+
+        updateDamageDisplay();
       }
     } catch (NumberFormatException e) {
       // Recovery action in case of exception
@@ -647,7 +641,7 @@ public class MainViewController extends Attributes {
       setDx(currentDx); // setting Dx textfield
       settingBasicSpeed(); // calling Basic Speed calculation and Basic Move calculation
       settingBasicMove(); // they're needed everytime Dx changes and correspond to the basic values of
-                          // each
+      // each
       bSpeedSet.setText(String.valueOf(getBasicSpeed())); // updating textfields
       bMoveSet.setText(String.valueOf(getBasicMove()));
       lbDodge.setText(String.valueOf(getBasicMove()));
@@ -655,7 +649,7 @@ public class MainViewController extends Attributes {
       bMoveCalculate();
 
       if (currentDx > 10) { // the same if chain that validates the amount of points spent for each
-                            // attribute, here, Dx
+        // attribute, here, Dx
         setDxPoints((currentDx - 10) * 20); // Values above 10
         dxCost.setText(String.valueOf(getDxPoints()));
         settingUnspentPoints();
@@ -768,7 +762,7 @@ public class MainViewController extends Attributes {
 
     } else {
       setHpPoints(0);
-      hpSet.setText(stSet.getText());
+      // hpSet.setText(stSet.getText());
 
     }
   }
@@ -788,7 +782,6 @@ public class MainViewController extends Attributes {
 
     } else {
       setWillPoints(0);
-      willSet.setText(iqSet.getText());
 
     }
   }
@@ -808,7 +801,7 @@ public class MainViewController extends Attributes {
 
     } else {
       setPerPoints(0);
-      perSet.setText(iqSet.getText());
+      // perSet.setText(iqSet.getText());
 
     }
   }
@@ -828,7 +821,7 @@ public class MainViewController extends Attributes {
 
     } else {
       setFatPoints(0);
-      fpSet.setText(htSet.getText());
+      // fpSet.setText(htSet.getText());
 
     }
   }

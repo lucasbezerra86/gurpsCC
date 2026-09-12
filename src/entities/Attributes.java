@@ -1,5 +1,8 @@
 package entities;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Attributes extends Data {
 
   private int st = 10;
@@ -32,11 +35,28 @@ public class Attributes extends Data {
   private int skillPoints;
   private int languagePoints;
   private int unspentPoints;
+  private String gdp;
+  private String bal;
 
   public void settingUnspentPoints() {
     this.unspentPoints = getPointTotal()
         - (stPoints + dxPoints + iqPoints + htPoints + hpPoints + willPoints + perPoints + fatPoints + basicSpeedPoints
             + basicMovePoints + advDisadvPoints + cfPoints + languagePoints + skillPoints);
+  }
+
+  private Map<Integer, String> gdpDmgTable = new HashMap<>();
+  private Map<Integer, String> balDmgTable = new HashMap<>();
+
+  public void dmgRegister() {
+    gdpDmgTable.put(st = 1, "1d-5");
+  }
+
+  public void setLanguagePoints(int languagePoints) {
+    this.languagePoints = languagePoints;
+  }
+
+  public int getLanguagePoints() {
+    return languagePoints;
   }
 
   public void settingBasicLift() {
@@ -49,6 +69,22 @@ public class Attributes extends Data {
 
   public void settingBasicMove() {
     this.basicMove = (dx + ht) / 4;
+  }
+
+  public String getGdp() {
+    return gdp;
+  }
+
+  public void setGdp(String gdp) {
+    this.gdp = gdp;
+  }
+
+  public String getBal() {
+    return bal;
+  }
+
+  public void setBal(String bal) {
+    this.bal = bal;
   }
 
   public int getSt() {

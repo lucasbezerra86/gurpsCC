@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mvPane" prefHeight="720.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.StartUpController">
+<AnchorPane fx:id="mvPane" prefHeight="720.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.StartUpController">
    <children>
       <Button fx:id="btNew" layoutX="353.0" layoutY="316.0" mnemonicParsing="false" onAction="#onBtNewAction" text="New Character">
          <font>
@@ -16,7 +16,7 @@
             <Font size="20.0" />
          </font>
       </Button>
-      <Button fx:id="btQuit" layoutX="701.0" layoutY="316.0" mnemonicParsing="false" text="Quit">
+      <Button fx:id="btQuit" layoutX="701.0" layoutY="316.0" mnemonicParsing="false" onAction="#onBtnCloseAction" text="Quit">
          <font>
             <Font size="20.0" />
          </font>
