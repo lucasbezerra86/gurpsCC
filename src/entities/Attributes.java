@@ -29,11 +29,9 @@ public class Attributes extends Data {
   private int encumbrance = basicLift;
   private int dodge = basicMove;
   private int reaction;
-  private int advDisadvPoints;
+  private int advDisadvPoints = 0;
+  private int advAdvantPoints = 0;
   private int tl;
-  private int cfPoints;
-  private int skillPoints;
-  private int languagePoints;
   private int unspentPoints;
   private String gdp;
   private String bal;
@@ -41,22 +39,23 @@ public class Attributes extends Data {
   public void settingUnspentPoints() {
     this.unspentPoints = getPointTotal()
         - (stPoints + dxPoints + iqPoints + htPoints + hpPoints + willPoints + perPoints + fatPoints + basicSpeedPoints
-            + basicMovePoints + advDisadvPoints + cfPoints + languagePoints + skillPoints);
+            + basicMovePoints + advDisadvPoints + advAdvantPoints);
   }
 
-  private Map<Integer, String> gdpDmgTable = new HashMap<>();
-  private Map<Integer, String> balDmgTable = new HashMap<>();
-
-  public void dmgRegister() {
-    gdpDmgTable.put(st = 1, "1d-5");
+  public void setAdvAdvantPoints(int advAdvantPoints) {
+    this.advAdvantPoints = advAdvantPoints;
   }
 
-  public void setLanguagePoints(int languagePoints) {
-    this.languagePoints = languagePoints;
+  public int getAdvantPoints() {
+    return advAdvantPoints;
   }
 
-  public int getLanguagePoints() {
-    return languagePoints;
+  public void setDisadvPoints(int advDisadvPoints) {
+    this.advDisadvPoints = advDisadvPoints;
+  }
+
+  public int getDisadvPoints() {
+    return advDisadvPoints;
   }
 
   public void settingBasicLift() {

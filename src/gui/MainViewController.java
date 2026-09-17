@@ -2,23 +2,13 @@ package gui;
 
 import entities.Attributes;
 import javafx.fxml.FXML;
-import javafx.collections.FXCollections;
-import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.collections.*;
-import javafx.fxml.*;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.lang.Iterable;
-import java.util.ArrayList;
 import javafx.scene.control.TextInputControl;
 
 public class MainViewController extends Attributes {
-  // * FXML correspondence of each element on the frontend: TextFields, Labels,
-  // etc.
+  // * FXML correspondence of each element
 
   @FXML
   TextField stSet;
@@ -381,6 +371,57 @@ public class MainViewController extends Attributes {
   Label lbLanCost00;
 
   @FXML
+  Label skCost01;
+  @FXML
+  Label skCost02;
+  @FXML
+  Label skCost03;
+  @FXML
+  Label skCost04;
+  @FXML
+  Label skCost05;
+  @FXML
+  Label skCost06;
+  @FXML
+  Label skCost07;
+  @FXML
+  Label skCost08;
+  @FXML
+  Label skCost09;
+  @FXML
+  Label skCost10;
+  @FXML
+  Label skCost11;
+  @FXML
+  Label skCost12;
+  @FXML
+  Label skCost13;
+  @FXML
+  Label skCost14;
+  @FXML
+  Label skCost15;
+
+  @FXML
+  Label psuCost01;
+
+  @FXML
+  Label psuCost02;
+
+  @FXML
+  Label psuCost03;
+
+  @FXML
+
+  Label psuCost04;
+
+  @FXML
+
+  Label psuCost05;
+
+  @FXML
+  Label pscuCost06;
+
+  @FXML
   Label lbLanCost01;
 
   @FXML
@@ -449,8 +490,7 @@ public class MainViewController extends Attributes {
   @FXML
   ComboBox<Languages> written4;
 
-  private void bindAttr(TextInputControl field, Object initialValue, Runnable onCalculate) { // Listener, protector and
-                                                                                             // binder o attr
+  private void bindAttr(TextInputControl field, Object initialValue, Runnable onCalculate) { // listener main structure
     field.setText(String.valueOf(initialValue));
     field.setStyle("-fx-border-color: green;");
 
@@ -466,11 +506,11 @@ public class MainViewController extends Attributes {
       }
 
       try {
-        int value = Integer.parseInt(newValue);
+        int value = Integer.parseInt(newValue.trim());
 
         if (value >= 1) {
           field.setStyle("-fx-border-color: green;");
-          onCalculate.run(); // Executa o cálculo imediatamente a cada dígito!
+          onCalculate.run();
         } else {
           field.setStyle("-fx-border-color: red;");
         }
@@ -480,10 +520,10 @@ public class MainViewController extends Attributes {
     });
 
     field.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
-      if (!isNowFocused) { // Quando o campo perde o foco
+      if (!isNowFocused) {
         String text = field.getText();
         if (text == null || text.trim().isEmpty() || Integer.parseInt(text.trim()) < 1) {
-          field.setText("1"); // Restaura o mínimo do GURPS
+          field.setText("1");
           field.setStyle("-fx-border-color: green;");
           onCalculate.run();
         }
@@ -491,62 +531,265 @@ public class MainViewController extends Attributes {
     });
   }
 
-  public void dmgRegister() { // Damage table in progress
-
+  // Damage Table
+  private void dmgRegister() {
     gdpDmgTable.put(1, "1d-6");
     gdpDmgTable.put(2, "1d-6");
-    gdpDmgTable.put(3, "1d-6");
-    gdpDmgTable.put(4, "1d-6");
-    gdpDmgTable.put(5, "1d-6");
-    gdpDmgTable.put(6, "1d-6");
-    gdpDmgTable.put(7, "1d-6");
-    gdpDmgTable.put(8, "1d-6");
-    gdpDmgTable.put(9, "1d-6");
-    gdpDmgTable.put(10, "1d-6");
-    gdpDmgTable.put(11, "1d-6");
-    gdpDmgTable.put(12, "1d-6");
-    gdpDmgTable.put(13, "1d-6");
-    gdpDmgTable.put(14, "1d-6");
-    gdpDmgTable.put(15, "1d-6");
-    gdpDmgTable.put(16, "1d-5");
-    gdpDmgTable.put(17, "1d-5");
-    gdpDmgTable.put(18, "1d-5");
-    gdpDmgTable.put(19, "1d-5");
-    gdpDmgTable.put(20, "1d-5");
-    gdpDmgTable.put(21, "1d-5");
-    gdpDmgTable.put(22, "1d-5");
-    gdpDmgTable.put(23, "1d-5");
-    gdpDmgTable.put(24, "1d-5");
-    gdpDmgTable.put(25, "1d-5");
-    gdpDmgTable.put(26, "1d-5");
-    gdpDmgTable.put(27, "1d-5");
-    gdpDmgTable.put(28, "1d-5");
-    gdpDmgTable.put(29, "1d-5");
-    gdpDmgTable.put(30, "1d-5");
+    gdpDmgTable.put(3, "1d-5");
+    gdpDmgTable.put(4, "1d-5");
+    gdpDmgTable.put(5, "1d-4");
+    gdpDmgTable.put(6, "1d-4");
+    gdpDmgTable.put(7, "1d-3");
+    gdpDmgTable.put(8, "1d-3");
+    gdpDmgTable.put(9, "1d-2");
+    gdpDmgTable.put(10, "1d-2");
+    gdpDmgTable.put(11, "1d-1");
+    gdpDmgTable.put(12, "1d-1");
+    gdpDmgTable.put(13, "1d");
+    gdpDmgTable.put(14, "1d");
+    gdpDmgTable.put(15, "1d+1");
+    gdpDmgTable.put(16, "1d+1");
+    gdpDmgTable.put(17, "1d+2");
+    gdpDmgTable.put(18, "1d+2");
+    gdpDmgTable.put(19, "2d-1");
+    gdpDmgTable.put(20, "2d-1");
+    gdpDmgTable.put(21, "2d");
+    gdpDmgTable.put(22, "2d");
+    gdpDmgTable.put(23, "2d+1");
+    gdpDmgTable.put(24, "2d+1");
+    gdpDmgTable.put(25, "2d+2");
+    gdpDmgTable.put(26, "2d+2");
+    gdpDmgTable.put(27, "3d-1");
+    gdpDmgTable.put(28, "3d-1");
+    gdpDmgTable.put(29, "3d");
+    gdpDmgTable.put(30, "3d");
+    gdpDmgTable.put(31, "3d+1");
+    gdpDmgTable.put(32, "3d+1");
+    gdpDmgTable.put(33, "3d+2");
+    gdpDmgTable.put(34, "3d+2");
+    gdpDmgTable.put(35, "4d-1");
+    gdpDmgTable.put(36, "4d-1");
+    gdpDmgTable.put(37, "4d");
+    gdpDmgTable.put(38, "4d");
+    gdpDmgTable.put(39, "4d+1");
+    gdpDmgTable.put(40, "4d+1");
+    gdpDmgTable.put(41, "4d+2");
+    gdpDmgTable.put(42, "4d+2");
+    gdpDmgTable.put(43, "5d-1");
+    gdpDmgTable.put(44, "5d-1");
+    gdpDmgTable.put(45, "5d");
+    gdpDmgTable.put(46, "5d+1");
+    gdpDmgTable.put(47, "5d+1");
+    gdpDmgTable.put(48, "5d+2");
+    gdpDmgTable.put(49, "5d+2");
+    gdpDmgTable.put(50, "5d+2");
+    gdpDmgTable.put(51, "6d-1");
+    gdpDmgTable.put(52, "6d-1");
+    gdpDmgTable.put(53, "6d-1");
+    gdpDmgTable.put(54, "6d");
+    gdpDmgTable.put(55, "6d");
+    gdpDmgTable.put(56, "6d-1");
+    gdpDmgTable.put(57, "6d-1");
+    gdpDmgTable.put(58, "6d");
+    gdpDmgTable.put(59, "6d");
+    gdpDmgTable.put(60, "7d-1");
+    gdpDmgTable.put(61, "7d-1");
+    gdpDmgTable.put(62, "7d");
+    gdpDmgTable.put(63, "7d");
+    gdpDmgTable.put(64, "7d+1");
+    gdpDmgTable.put(65, "7d+1");
+    gdpDmgTable.put(66, "7d+2");
+    gdpDmgTable.put(67, "7d+2");
+    gdpDmgTable.put(68, "8d-1");
+    gdpDmgTable.put(69, "8d-1");
+    gdpDmgTable.put(70, "8d");
+    gdpDmgTable.put(71, "8d");
+    gdpDmgTable.put(72, "8d+1");
+    gdpDmgTable.put(73, "8d+1");
+    gdpDmgTable.put(74, "8d+2");
+    gdpDmgTable.put(75, "8d+2");
+    gdpDmgTable.put(76, "9d-1");
+    gdpDmgTable.put(77, "9d-1");
+    gdpDmgTable.put(78, "9d");
+    gdpDmgTable.put(79, "9d");
+    gdpDmgTable.put(80, "9d");
+    gdpDmgTable.put(81, "9d+1");
+    gdpDmgTable.put(82, "9d+1");
+    gdpDmgTable.put(83, "9d+2");
+    gdpDmgTable.put(84, "9d+2");
+    gdpDmgTable.put(85, "9d+2");
+    gdpDmgTable.put(86, "10d-1");
+    gdpDmgTable.put(87, "10d-1");
+    gdpDmgTable.put(88, "10d");
+    gdpDmgTable.put(89, "10d");
+    gdpDmgTable.put(90, "10d");
+    gdpDmgTable.put(91, "10d+1");
+    gdpDmgTable.put(92, "10d+1");
+    gdpDmgTable.put(93, "10d+2");
+    gdpDmgTable.put(94, "10d+2");
+    gdpDmgTable.put(95, "10d+2");
+    gdpDmgTable.put(96, "11d-1");
+    gdpDmgTable.put(97, "11d-1");
+    gdpDmgTable.put(98, "11d");
+    gdpDmgTable.put(99, ":written311d");
+    gdpDmgTable.put(100, "11d");
+
+    // ==========================================
+    // SWING TABLE
+    // ==========================================
+    balDmgTable.put(1, "");
+    balDmgTable.put(2, "");
+    balDmgTable.put(3, "");
+    balDmgTable.put(4, "");
+    balDmgTable.put(5, "");
+    balDmgTable.put(6, "");
+    balDmgTable.put(7, "");
+    balDmgTable.put(8, "");
+    balDmgTable.put(9, "");
+    balDmgTable.put(10, "");
+    balDmgTable.put(11, "");
+    balDmgTable.put(12, "");
+    balDmgTable.put(13, "");
+    balDmgTable.put(14, "");
+    balDmgTable.put(15, "");
+    balDmgTable.put(16, "");
+    balDmgTable.put(17, "");
+    balDmgTable.put(18, "");
+    balDmgTable.put(19, "");
+    balDmgTable.put(20, "");
+    balDmgTable.put(21, "");
+    balDmgTable.put(22, "");
+    balDmgTable.put(23, "");
+    balDmgTable.put(24, "");
+    balDmgTable.put(25, "");
+    balDmgTable.put(26, "");
+    balDmgTable.put(27, "");
+    balDmgTable.put(28, "");
+    balDmgTable.put(29, "");
+    balDmgTable.put(30, "");
+    balDmgTable.put(31, "");
+    balDmgTable.put(32, "");
+    balDmgTable.put(33, "");
+    balDmgTable.put(34, "");
+    balDmgTable.put(35, "");
+    balDmgTable.put(36, "");
+    balDmgTable.put(37, "");
+    balDmgTable.put(38, "");
+    balDmgTable.put(39, "");
+    balDmgTable.put(40, "");
+    balDmgTable.put(41, "");
+    balDmgTable.put(42, "");
+    balDmgTable.put(43, "");
+    balDmgTable.put(44, "");
+    balDmgTable.put(45, "");
+    balDmgTable.put(46, "");
+    balDmgTable.put(47, "");
+    balDmgTable.put(48, "");
+    balDmgTable.put(49, "");
+    balDmgTable.put(50, "");
+    balDmgTable.put(51, "");
+    balDmgTable.put(52, "");
+    balDmgTable.put(53, "");
+    balDmgTable.put(54, "");
+    balDmgTable.put(55, "");
+    balDmgTable.put(56, "");
+    balDmgTable.put(57, "");
+    balDmgTable.put(58, "");
+    balDmgTable.put(59, "");
+    balDmgTable.put(60, "");
+    balDmgTable.put(61, "");
+    balDmgTable.put(62, "");
+    balDmgTable.put(63, "");
+    balDmgTable.put(64, "");
+    balDmgTable.put(65, "");
+    balDmgTable.put(66, "");
+    balDmgTable.put(67, "");
+    balDmgTable.put(68, "");
+    balDmgTable.put(69, "");
+    balDmgTable.put(70, "");
+    balDmgTable.put(71, "");
+    balDmgTable.put(72, "");
+    balDmgTable.put(73, "");
+    balDmgTable.put(74, "");
+    balDmgTable.put(75, "");
+    balDmgTable.put(76, "");
+    balDmgTable.put(77, "");
+    balDmgTable.put(78, "");
+    balDmgTable.put(79, "");
+    balDmgTable.put(80, "");
+    balDmgTable.put(81, "");
+    balDmgTable.put(82, "");
+    balDmgTable.put(83, "");
+    balDmgTable.put(84, "");
+    balDmgTable.put(85, "");
+    balDmgTable.put(86, "");
+    balDmgTable.put(87, "");
+    balDmgTable.put(88, "");
+    balDmgTable.put(89, "");
+    balDmgTable.put(90, "");
+    balDmgTable.put(91, "");
+    balDmgTable.put(92, "");
+    balDmgTable.put(93, "");
+    balDmgTable.put(94, "");
+    balDmgTable.put(95, "");
+    balDmgTable.put(96, "");
+    balDmgTable.put(97, "");
+    balDmgTable.put(98, "");
+    balDmgTable.put(99, "");
+    balDmgTable.put(100, "");
 
   }
 
-  public void updateDamageDisplay() { // Damage display in progress
+  private int parseOrDefault(String text, int defaultValue) {
+    if (text == null || text.trim().isEmpty())
+      return defaultValue;
     try {
-      int currentSt = Integer.parseInt(stSet.getText());
-
-      String dmgGdp = gdpDmgTable.getOrDefault(currentSt, "ST fora da tabela");
-
-      setThurst.setText(dmgGdp);
+      return Integer.parseInt(text.trim());
     } catch (NumberFormatException e) {
-      setThurst.setText("-");
+      return defaultValue;
     }
   }
 
-  public void initialize() {
+  private void updateDamageDisplay() {
+    try {
+      String stText = stSet.getText();
+      if (stText == null || stText.trim().isEmpty()) {
+        setThurst.setText("-");
+        return;
+      }
 
+      int currentSt = Integer.parseInt(stText.trim());
+      String dmgGdp;
+      String dmgBal;
+
+      if (currentSt >= 100) {
+        int extraDice = (currentSt - 100) / 10;
+        int totalDiceGdp = 11 + extraDice;
+        int totalDiceBal = 13 + extraDice;
+        dmgGdp = totalDiceGdp + "d";
+        dmgBal = totalDiceBal + "d";
+      } else {
+        dmgGdp = gdpDmgTable.getOrDefault(currentSt, "-");
+        dmgBal = balDmgTable.getOrDefault(currentSt, "-");
+      }
+
+      setThurst.setText(dmgGdp);
+      setSwing.setText(dmgBal);
+
+    } catch (NumberFormatException e) {
+      setThurst.setText("-");
+      setSwing.setText("-");
+    }
+
+  }
+
+  public void initialize() {
     dmgRegister(); // Initialize Damage Table
 
     bindAttr(stSet, getSt(), this::stCalculate);
     bindAttr(dxSet, getDx(), this::dxCalculate);
     bindAttr(iqSet, getIq(), this::iqCalculate);
     bindAttr(htSet, getHt(), this::htCalculate);
-
     updateDamageDisplay();
 
     bindAttr(hpSet, stSet.getText(), this::hpCalculate);
@@ -554,122 +797,86 @@ public class MainViewController extends Attributes {
     bindAttr(perSet, iqSet.getText(), this::perCalculate);
     bindAttr(fpSet, htSet.getText(), this::fpCalculate);
 
+    bindAttr(ptTotalSet, ptTotalSet.getText(), this::getPointTotal);
+    bindAttr(tfAdCost00, tfAdCost00.getText(), this::advantageCalculate);
+
     bSpeedSet.setText(String.format("%.2f", (getBasicSpeed()))); // Basic speed can have decimal places
-    bMoveSet.setText(String.valueOf(getBasicMove())); // Basic move is rounded down
+    bMoveSet.setText(String.valueOf(getBasicMove()));
     lbDodge.setText(String.valueOf(getBasicMove()));
     lbBasicLift.setText(String.valueOf(getBasicLift()));
     ptTotalSet.setText(String.valueOf(getPointTotal())); // Method to get total points for the character
 
     // Basic calculation calls
     pointTotalCalculate(); // Method to keep track of spending/remaining character points
-    stCalculate(); // ST points and sub-attributes calculation
-    dxCalculate(); // DX points calculation and basic speed and move
-    iqCalculate(); // IQ points calculation, as well as base will and per
-    htCalculate(); // HT points calculation and base HP
-    hpCalculate(); // HP points calculation if HP is higher than ST
-    willCalculate(); // will points calculation if will is higher than IQ
-    perCalculate(); // per points calculation if per is higher than IQ
-    fpCalculate(); // fatigue points calculation if FP is higher than HT
-    settingBasicMove(); // Starting Basic Move value
-    settingBasicSpeed(); // Starting Basic Speed value
-    settingBasicLift(); // Starting Basic Lift value
-    bSpeedCalculate(); // Calling extra speed points if any
-    bMoveCalculate(); // Calling extra move points if any
+    stCalculate();
+    dxCalculate();
+    iqCalculate();
+    htCalculate();
+    hpCalculate();
+    willCalculate();
+    perCalculate();
+    fpCalculate();
+    settingBasicMove();
+    settingBasicSpeed();
+    settingBasicLift();
+    bSpeedCalculate();
+    bMoveCalculate();
 
   }
 
   // Damage Tables' HashMaps
-  public Map<Integer, String> gdpDmgTable = new HashMap<>();
-  public Map<Integer, String> balDmgTable = new HashMap<>();
+  private static final Map<Integer, String> gdpDmgTable = new HashMap<>();
+  private static final Map<Integer, String> balDmgTable = new HashMap<>();
 
   public void pointTotalCalculate() {
-    try {
-      setPointTotal(getPointTotal() - getUnspentPoints());
-      settingUnspentPoints();
-      lbUnspentPoints.setText(String.valueOf(getUnspentPoints()));
-    } catch (NumberFormatException e) {
-      lbUnspentPoints.setText("0");
-    }
+
+    setPointTotal(parseOrDefault(ptTotalSet.getText(), 0));
+    settingUnspentPoints();
+    lbUnspentPoints.setText(String.valueOf(getUnspentPoints()));
+
   }
 
-  // This method calculates character points spent (or acquired) from the ST
-  // It also determines the initial hp
+  public void advantageCalculate() {
+
+    int points = parseOrDefault(tfAdCost00.getText(), 0);
+    setAdvAdvantPoints(points);
+    settingUnspentPoints();
+    lbUnspentPoints.setText(String.valueOf(getUnspentPoints()));
+
+  }
+
   public void stCalculate() {
-    try {
+    int currentSt = Integer.parseInt(stSet.getText().trim());
 
-      int currentSt = Integer.parseInt(stSet.getText()); // Getting the TextField value and storing in a local variable
-      setSt(currentSt); // Updating ST Label with current value
-      settingBasicLift(); // Calling method to calculate Basic Lift
-      lbBasicLift.setText(String.valueOf(getBasicLift())); // Updating Basic Lift label
+    setSt(currentSt);
+    settingBasicLift();
+    lbBasicLift.setText(String.valueOf(getBasicLift()));
+    updateDamageDisplay();
 
-      if (currentSt > 10) { // if the player is "buying" a value above 10
-        hpSet.setText(String.valueOf(currentSt)); // set the corresponding hp
-        hpCalculate(); // call the hp calculation
-        setStPoints((currentSt - 10) * 10); // formula to get the amount of points for St above 10
-        stCost.setText(String.valueOf(getStPoints())); // update amount on the st cost label
-        settingUnspentPoints(); // update points total
-        lbUnspentPoints.setText(String.valueOf(getUnspentPoints())); // update label of unspent points
+    hpSet.setText(String.valueOf(currentSt));
+    hpCalculate();
 
-      } else if (currentSt < 1) { // attributes don't go below 1 in GURPS.
-        stSet.setText("1");
+    setStPoints((currentSt - 10) * 10);
+    stCost.setText(String.valueOf(getStPoints()));
 
-      } else {
-        hpSet.setText(stSet.getText()); // hp update again, but this time for values below 10
-        hpCalculate();
-        setStPoints((10 - currentSt) * -10); // formula for negative values
-        stCost.setText(String.valueOf(getStPoints()));
-        settingUnspentPoints();
-        lbUnspentPoints.setText(String.valueOf(getUnspentPoints()));
-
-        updateDamageDisplay();
-      }
-    } catch (NumberFormatException e) {
-      // Recovery action in case of exception
-      stSet.setStyle("-fx-border-color: red;"); // a graphic representation of a red border on the text field
-      stCost.setText("0"); // reset cost label
-      setSt(1); // reset St
-      hpCalculate(); // calculate base hp again
-      settingUnspentPoints(); // also calculate points
-      lbUnspentPoints.setText(String.valueOf(getUnspentPoints()));
-    }
-
+    settingUnspentPoints();
+    lbUnspentPoints.setText(String.valueOf(getUnspentPoints()));
   }
 
   public void dxCalculate() {
-    try {
-      int currentDx = Integer.parseInt(dxSet.getText()); // temp variable to store value
-      setDx(currentDx); // setting Dx textfield
-      settingBasicSpeed(); // calling Basic Speed calculation and Basic Move calculation
-      settingBasicMove(); // they're needed everytime Dx changes and correspond to the basic values of
-      // each
-      bSpeedSet.setText(String.valueOf(getBasicSpeed())); // updating textfields
-      bMoveSet.setText(String.valueOf(getBasicMove()));
-      lbDodge.setText(String.valueOf(getBasicMove()));
-      bSpeedCalculate(); // here's the method to get spent points on each attribute
-      bMoveCalculate();
-
-      if (currentDx > 10) { // the same if chain that validates the amount of points spent for each
-        // attribute, here, Dx
-        setDxPoints((currentDx - 10) * 20); // Values above 10
-        dxCost.setText(String.valueOf(getDxPoints()));
-        settingUnspentPoints();
-        lbUnspentPoints.setText(String.valueOf(getUnspentPoints()));
-      } else if (currentDx < 1) {
-        dxSet.setText("1");
-      } else {
-        setDxPoints((10 - currentDx) * -20);
-        dxCost.setText(String.valueOf(getDxPoints()));
-        settingUnspentPoints();
-        lbUnspentPoints.setText(String.valueOf(getUnspentPoints()));
-      }
-
-    } catch (NumberFormatException e) {
-      dxSet.setStyle("-fx-border-color: red;");
-      dxCost.setText("1");
-      setDx(1);
-      bSpeedCalculate();
-      bMoveCalculate();
-    }
+    int currentDx = Integer.parseInt(dxSet.getText());
+    setDx(currentDx);
+    settingBasicSpeed();
+    settingBasicMove();
+    bSpeedSet.setText(String.valueOf(getBasicSpeed()));
+    bMoveSet.setText(String.valueOf(getBasicMove()));
+    lbDodge.setText(String.valueOf(getBasicMove()));
+    bSpeedCalculate();
+    bMoveCalculate();
+    setDxPoints((currentDx - 10) * 20);
+    dxCost.setText(String.valueOf(getDxPoints()));
+    settingUnspentPoints();
+    lbUnspentPoints.setText(String.valueOf(getUnspentPoints()));
   }
 
   public void iqCalculate() {
@@ -685,8 +892,6 @@ public class MainViewController extends Attributes {
         iqCost.setText(String.valueOf(getIqPoints()));
         settingUnspentPoints();
         lbUnspentPoints.setText(String.valueOf(getUnspentPoints()));
-      } else if (currentIq < 1) {
-        iqSet.setText("1");
       } else {
         willSet.setText(iqSet.getText());
         perSet.setText(iqSet.getText());
@@ -726,8 +931,6 @@ public class MainViewController extends Attributes {
         htCost.setText(String.valueOf(getHtPoints()));
         settingUnspentPoints();
         lbUnspentPoints.setText(String.valueOf(getUnspentPoints()));
-      } else if (currentHt < 1) {
-        htSet.setText("1");
       } else {
         setHtPoints((10 - currentHt) * -10);
         htCost.setText(String.valueOf(getHtPoints()));
